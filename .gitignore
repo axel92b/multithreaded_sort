@@ -332,4 +332,5 @@ logs
 .vscode/launch.json
 build/
 gui.spec
-
+.idea/
+cmake-build-debug/
