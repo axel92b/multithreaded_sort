@@ -1,4 +1,4 @@
-# Multi-threaded sort
+# Multithreaded sort
 My implementations for multithreaded sorting in C++
 
 ### TODO
