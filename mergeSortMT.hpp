@@ -1,3 +1,4 @@
+#pragma once
 #include <cstring>
 #include <thread>
 
@@ -54,7 +55,7 @@ void mergeSortAuxMT(T* arr, T* temp, int size, int cur_depth, int max_depth){
 template<class T>
 void mergeSortMT(T arr[], int size, int max_depth = 3){
   T *temp = new T[size];
-  int depth = 1;
-  mergeSortAuxMT(arr, temp, size, depth, max_depth);
+//  int depth = 1;
+  mergeSortAuxMT(arr, temp, size, 1, max_depth);
   delete[] temp;
 }
