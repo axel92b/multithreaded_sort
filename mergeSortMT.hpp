@@ -37,12 +37,12 @@ void mergeSortAuxMT(T* arr, T* temp, int size, int cur_depth, int max_depth){
   int left = size/2;
   if (cur_depth <= max_depth) {
     std::thread t(mergeSortAuxMT<T>, arr, temp, left, cur_depth+1, max_depth);
-    std::thread t1(mergeSortAuxMT<T>, (arr + left), temp, (size - left), cur_depth+1, max_depth);
+    std::thread t1(mergeSortAuxMT<T>, (arr + left), temp+left, (size - left), cur_depth+1, max_depth);
     t.join();
     t1.join();
   } else {
     mergeSortAuxMT(arr, temp, left, cur_depth, max_depth);
-    mergeSortAuxMT(arr + left, temp, (size - left), cur_depth, max_depth);
+    mergeSortAuxMT(arr + left, temp+left, (size - left), cur_depth, max_depth);
   }
   merge(arr,left,arr+left,size-left,temp);
   memcpy(arr, temp,size*sizeof(T));
