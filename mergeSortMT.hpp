@@ -41,8 +41,8 @@ void mergeSortAuxMT(T* arr, T* temp, int size, int cur_depth, int max_depth){
     t.join();
     t1.join();
   } else {
-    mergeSortAuxMT(arr, temp, left, cur_depth, max_depth);
-    mergeSortAuxMT(arr + left, temp+left, (size - left), cur_depth, max_depth);
+    mergeSortAuxMT(arr, temp, left, cur_depth+1, max_depth);
+    mergeSortAuxMT(arr + left, temp+left, (size - left), cur_depth+1, max_depth);
   }
   merge(arr,left,arr+left,size-left,temp);
   memcpy(arr, temp,size*sizeof(T));
@@ -55,7 +55,6 @@ void mergeSortAuxMT(T* arr, T* temp, int size, int cur_depth, int max_depth){
 template<class T>
 void mergeSortMT(T arr[], int size, int max_depth = 3){
   T *temp = new T[size];
-//  int depth = 1;
   mergeSortAuxMT(arr, temp, size, 1, max_depth);
   delete[] temp;
 }
