@@ -17,7 +17,7 @@ First attempt was to maintain specific number of threads(e.g. 8), if current num
 As you can see we have unfair load distribution, Thread 1 need to sort 500 elements, Thread 2 have created Threads 3 and 4 and therefore just waiting for them to complete their work(before doing merge and memcopy) and Threads 3 and 4 need to sort 250 elements each. In this case we have 4 Threads, but only 3 doing actual work.
  
 ### Second try
-Second attempt was to create threads instead of recursive calls based on depth of recursive call tree. Basically 2^depth is number of active threads. For example if wechoose depth to be 2, sort function will create 2 threads and will wait for them to finish, each thread will create 2 more threads and will wait for them to finish hence wehave at most 4 active threads, that actually doing work. Each thread have received 250 elements to sort. Looks pretty much fair distribution.  
+Second attempt was to create threads instead of recursive calls based on depth of recursive call tree. Basically `2^depth` is number of active threads. For example if wechoose depth to be 2, sort function will create 2 threads and will wait for them to finish, each thread will create 2 more threads and will wait for them to finish hence wehave at most 4 active threads, that actually doing work. Each thread have received 250 elements to sort. Looks pretty much fair distribution.  
 ![Second](/Images/2.png)  
 For now, i think, it's the most optimal solution.
 
