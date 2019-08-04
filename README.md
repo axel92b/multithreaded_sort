@@ -12,7 +12,7 @@ So just include header to your source file and to linker.
 When i have looked on recursive call tree, i realized that i can replace some recursive calls by thread creation. 
 
 ### First try
-First attempt was to maintain specific number of threads(e.g. 8), if current number of threads is less than 8, then create 2 more threads instead of recursive calls. And if 2 Threads finished their work, then subtract 2 from current number of threads. But at some point of time it could look like this.  
+First attempt was to maintain specific number of threads(e.g. 8), if current number of threads is less than 8, then create 2 more threads instead of recursive calls. And if 2 Threads finished their work, then subtract 2 from current number of threads(for thread count i have used `std::atomic`). But at some point of time it could look like this.  
 ![First try](/Images/1.png)  
 As you can see we have unfair load distribution, Thread 1 need to sort 500 elements, Thread 2 have created Threads 3 and 4 and therefore just waiting for them to complete their work(before doing merge and memcopy) and Threads 3 and 4 need to sort 250 elements each. In this case we have 4 Threads, but only 3 doing actual work.
  
@@ -24,16 +24,22 @@ For now, i think, it's the most optimal solution.
 ## Benchmarks
 Let's compare Merge sort, Quick sort, std::sort and my modifications of Merge sort and Quick sort.  
 Test machine is my laptop:D
-* Intel Core i7-7700HQ
+* Intel Core i7-7700HQ(4 cores, 8 threads)
 * 16GB RAM
 * Windows 10 1903  
+* GCC 8.1.0 (without explicit optimizations)
 
 For time measurement i will use `chrono` and it's `high_resolution_clock` in milliseconds.
 Test array contains numbers in descending order.
-
-### TODO
-
-- [x] Uploaded first and most optimal version of multithreaded Merge sort(for now)
-- [ ] Add info about implementation
-- [ ] Compare original Merge sort, "naive" multithreaded Merge sort and my solution
-- [ ] Multithreaded version of Quicksort
+  
+### 1 Thread
+![1 Thread](/Images/Benchmark1.png)
+  
+### 2 Threads
+![2 Threads](/Images/Benchmark2.png) 
+  
+### 4 Threads
+![4 Threads](/Images/Benchmark4.png) 
+  
+### 8 Threads
+![8 Threads](/Images/Benchmark8.png) 
