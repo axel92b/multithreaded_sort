@@ -2,7 +2,7 @@
 My implementations for multithreaded sorting in C++
 
 ## Introduction and technical specifications
-I had an idea, about modifying existing sorting algorithms like Merge sort and Quick sort. The idea is to add multithreading, to make them faster. Time and space complexity aren't changed, but it's actually made them faster. But i think it's good idea to show how much faster they became and benchmark them against their original implementations(and std::sort).
+I had an idea, about modifying existing sorting algorithms like Merge sort and Quick sort. The idea is to add multithreading, to make them faster. Time and space complexity aren't changed, but it's actually made them faster. But i think it's good idea to show how much faster they became and benchmark them against their original implementations and other sorting algorithms like `std::sort` and parallel `boost::block_indirect_sort`.
 
 ## How to use
 Since i have used only C++11 things, headers should be quite crossplatform(Checked on Windows, but should run on Mac and Linux).
@@ -30,16 +30,27 @@ Test machine is my laptop:D
 * GCC 8.1.0 (without explicit optimizations)
 
 For time measurement i will use `chrono` and it's `high_resolution_clock` in milliseconds.
-Test array contains numbers in descending order.
+Test arrays contain random numbers, each sorting function receives copy of the same test array.(in order to make fair comparison)
   
 ### 1 Thread
-![1 Thread](/Images/Benchmark1.png)
+<p align="center">
+  <img src="/Images/Benchmark1.png">
+</p>  
+
   
 ### 2 Threads
-![2 Threads](/Images/Benchmark2.png) 
+<p align="center">
+  <img src="/Images/Benchmark2.png">
+</p>
   
 ### 4 Threads
-![4 Threads](/Images/Benchmark4.png) 
+<p align="center">
+  <img src="/Images/Benchmark4.png">
+</p>
   
 ### 8 Threads
-![8 Threads](/Images/Benchmark8.png) 
+<p align="center">
+  <img src="/Images/Benchmark8.png">
+</p>
+
+## Conclusion
