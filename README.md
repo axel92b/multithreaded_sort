@@ -51,7 +51,7 @@ In 2 threaded mode, one additional thread didn't really help to Quicksort. But 2
   <img src="/Images/Benchmark4.png">
 </p>
   
-In 4 threaded mode, Quicksort became 2 times faster than it's original single-threaded implementation. Somehow the first version of multithreaded Merge sort didn't benefit from 2 additional threads and finished its work in the exact same time as if he had only 2 threads. On the other hand, optimal version of multithreaded Merge sort finished its wort close to 4 times faster than its original implementation.  
+In 4 threaded mode, Quicksort became 2 times faster than it's original single-threaded implementation. Somehow the first version of multithreaded Merge sort didn't benefit from 2 additional threads and finished its work in the exact same time as if he had only 2 threads. On the other hand, optimal version of multithreaded Merge sort finished its work close to 4 times faster than its original implementation.  
 
 ### 8 Threads
 It's time to add `boost::block_indirect_sort`.
